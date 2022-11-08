@@ -1,14 +1,25 @@
 const getLotto = require('./getData');
-const getNumberCountArray = require('./calculation');
+const { getNumberCountArray, cutNeedData, getAddNumberCountArray, getAvgCount } = require('./calculation');
 
 async function main() {
 
     let lottoData = await getLotto();
-    // console.log(typeof (lottoData))
-    console.log(getNumberCountArray(lottoData));
-    // for (let lotto of lottoData) {
-    //     console.log(lotto)
-    // }
+
+    let numberCountArray = getNumberCountArray(lottoData);
+
+    let needArray = cutNeedData(lottoData);
+
+    let addNumberCountArray = getAddNumberCountArray(lottoData, numberCountArray)
+
+    let avg = getAvgCount(numberCountArray);
+
+    // console.log(avg)
+
+    for (let value of addNumberCountArray) {
+        console.log(value)
+    }
+    // array["로또번호"]
+
 
 }
 
