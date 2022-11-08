@@ -46,9 +46,9 @@ const headers = {
     let isFoundKeys = false;
 
     // XLSX.utils.sheet_add_aoa(worksheet, [[1, 2], [2, 3], [3, 4]], { origin: "A2" });
-    XLSX.utils.sheet_add_json(worksheet, [
-        { A: '년도', B: '회차', C: '추첨일' }
-    ], { skipHeader: true, origin: "A2" });
+    // XLSX.utils.sheet_add_json(worksheet, [
+    //     { A: '년도', B: '회차', C: '추첨일' }
+    // ], { skipHeader: true, origin: "A2" });
 
     while (true) {
 
@@ -79,6 +79,32 @@ const headers = {
         range.s.r++;
 
     }
+
+    worksheet["!merges"].map((merge) => {
+
+        let range = XLSX.utils.encode_range(merge).split(':')[0];
+        // let range = XLSX.utils.encode_range(merge);
+
+        const value = worksheet[range];
+
+
+        // console.log(merge)
+        // console.log(range)
+        // console.log(value)
+        // console.log('-----')
+
+        for (let i = merge.s.r; i <= merge.e.r; i++) {
+            for (let j = merge.s.c; j <= merge.e.c; j++) {
+                let cellPosition = XLSX.utils.encode_col(j) + XLSX.utils.encode_row(i);
+                // console.log(cellPosition)
+                // console.log(worksheet[cellPosition])
+                worksheet[cellPosition] = value
+                // console.log(worksheet[cellPosition])
+                // console.log(worksheet[cellPosition] = value)
+
+            }
+        }
+    })
 
     if (isFoundKeys || true) {
 
