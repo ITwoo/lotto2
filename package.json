@@ -14,6 +14,7 @@
     "fs": "^0.0.1-security",
     "html-table-to-json": "^1.0.0",
     "iconv-lite": "^0.6.3",
+    "lodash": "^4.17.21",
     "node-html-parser": "^6.1.1",
     "xlsx": "^0.18.5"
   }

@@ -1,5 +1,5 @@
 const getLotto = require('./getData');
-const { getNumberCountArray, cutNeedData, getAddNumberCountArray, getAvgCount } = require('./calculation');
+const { getNumberCountArray, cutNeedData, getAddNumberCountArray, getAvgCount, sortObjectValue } = require('./calculation');
 
 async function main() {
 
@@ -13,12 +13,14 @@ async function main() {
 
     let avg = getAvgCount(numberCountArray);
 
-    // console.log(avg)
+    let sortArray = sortObjectValue(addNumberCountArray);
 
-    for (let value of addNumberCountArray) {
+    // console.log(avg)
+    // array.reverse(); 역순 정렬
+    for (let value of sortArray.reverse()) {
         console.log(value)
     }
-    // array["로또번호"]
+    // array["로또번호"-1]
 
 
 }
