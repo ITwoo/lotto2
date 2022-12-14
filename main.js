@@ -1,5 +1,6 @@
 const getLotto = require('./getData');
-const { getNumberCountArray, cutNeedData, getAddNumberCountArray, getAvgCount, sortObjectValue } = require('./calculation');
+const { getNumberCountArray, cutNeedData, getAddNumberCountArray, getAvgCount, sortObjectValue, writeCountMap, writeSortArray } = require('./calculation');
+const fs = require('fs')
 
 async function main() {
 
@@ -15,14 +16,9 @@ async function main() {
 
     let sortArray = sortObjectValue(addNumberCountArray);
 
-    // console.log(avg)
-    // array.reverse(); 역순 정렬
-    for (let value of sortArray.reverse()) {
-        console.log(value)
-    }
-    // array["로또번호"-1]
-
-
+    // writeCountMap("countMap.txt", sortArray);
+    writeSortArray("sortArray.txt", numberCountArray);
+    console.log(numberCountArray)
 }
 
 module.exports = main;

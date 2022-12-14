@@ -1,4 +1,5 @@
 const { cloneDeep } = require('lodash');
+const fs = require('fs')
 
 function getNumberCountArray(lottoData) { // 각 숫자번호 별로 나온 횟수 확인
     let array = [];
@@ -144,10 +145,34 @@ function sortObjectValue(lottoData) {
 
 }
 
+function writeCountMap(fileName, sortArray) {
+    let countMap = {};
+    for (let value of sortArray.reverse()) {
+        if (countMap[value?.avg]) {
+            countMap[value?.avg] += 1;
+            continue;
+        }
+        countMap[value?.avg] = 1;
+        // fs.writeFileSync('log.txt', JSON.stringify(value), 'utf-8')   
+    }
+    fs.writeFileSync(fileName, "", 'utf-8');
+    for (let value in countMap) {
+        fs.appendFileSync(fileName, JSON.stringify({ [value]: countMap[value] }) + "\n", 'utf-8');
+    }
+}
+
+function writeSortArray(fileName, sortArray) {
+    fs.writeFileSync(fileName, "", 'utf-8');
+    for (let value of sortArray) {
+        fs.appendFileSync(fileName, JSON.stringify(value) + "\n", 'utf-8');
+    }
+}
 module.exports = {
     getNumberCountArray,
     cutNeedData,
     getAddNumberCountArray,
     getAvgCount,
     sortObjectValue,
+    writeCountMap,
+    writeSortArray
 };
